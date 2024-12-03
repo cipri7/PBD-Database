@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicație Gestionare Vânzări</title>
+</head>
+<body>
+    <h1>Aplicație Gestionare Vânzări</h1>
+    
+    <!-- Formular pentru vânzarea unui produs -->
+    <h2>Vânzare Produs</h2>
+    <form action="vanzare_produs.php" method="POST">
+        <label for="CNP">CNP:</label><br>
+        <input type="text" id="CNP" name="CNP" required><br><br>
+
+        <label for="produs">Nume Produs:</label><br>
+        <input type="text" id="produs" name="produs" required><br><br>
+
+        <label for="data">Data Achiziției (YYYY-MM-DD):</label><br>
+        <input type="date" id="data" name="data" required><br><br>
+
+        <label for="pret">Preț:</label><br>
+        <input type="number" id="pret" name="pret" step="0.01" required><br><br>
+
+        <label for="suma_incasata">Sumă Încăsată:</label><br>
+        <input type="number" id="suma_incasata" name="suma_incasata" step="0.01" required><br><br>
+
+        <button type="submit">Vinde Produs</button>
+    </form>
+    
+    <hr>
+
+      <!-- Formular pentru adăugarea unui client nou -->
+      <h2>Adăugare Client Nou</h2>
+      <form action="adauga_client.php" method="POST">
+          <label for="nume">Nume:</label><br>
+          <input type="text" id="nume" name="nume" maxlength="15" required><br><br>
+  
+          <label for="prenume">Prenume:</label><br>
+          <input type="text" id="prenume" name="prenume" maxlength="20" required><br><br>
+  
+          <label for="CNP">CNP:</label><br>
+          <input type="text" id="CNP" name="CNP" required><br><br>
+  
+          <label for="adresa">Adresa:</label><br>
+          <input type="text" id="adresa" name="adresa" required><br><br>
+  
+          <label for="telefon">Telefon:</label><br>
+          <input type="text" id="telefon" name="telefon" required><br><br>
+  
+          <label for="disponibil">Disponibil în Cont:</label><br>
+          <input type="number" id="disponibil" name="disponibil" step="0.01" required><br><br>
+  
+          <button type="submit">Adaugă Client</button>
+      </form>
+    
+      <hr>
+
+    <!-- Formular pentru generarea raportului -->
+    <h2>Generare Raport: Produse Achitate Integral</h2>
+    <form action="raport_achitate.php" method="POST">
+        <button type="submit">Generează Raport</button>
+    </form>
+
+    <hr>
+
+     <!-- Formular pentru generarea raportului detaliat -->
+     <h2>Generare Raport Detaliat</h2>
+     <form action="raport_detaliat.php" method="POST">
+         <button type="submit">Generează Raport Detaliat</button>
+     </form>
+
+
+     <hr>
+
+      <!-- Secțiunea pentru calcul rest de plată -->
+    <h2>Calcul Rest de Plată</h2>
+    <form action="rest_plata.php" method="POST">
+        <label for="cnp">CNP Client:</label>
+        <input type="text" id="cnp" name="cnp" required><br><br>
+
+        <label for="produs">Nume Produs:</label>
+        <input type="text" id="produs" name="produs" required><br><br>
+
+        <button type="submit">Calculează Restul de Plată</button>
+    </form>
+
+    <hr>
+
+    <!-- Secțiunea pentru Clienți Major -->
+    <h2>Clienți Major</h2>
+    <form action="clienti_majori.php" method="GET">
+        <button type="submit">Afișează Clienți Major</button>
+    </form>
+
+    <hr>
+
+    <!-- Secțiunea pentru clientul cu cele mai multe produse neplătite integral -->
+    <h2>Client cu Cele Mai Multe Produse Neplătite Integral</h2>
+    <form action="client_neplatit_integral.php" method="GET">
+        <button type="submit">Afișează Clientul cu Cele Mai Multe Produse Neplătite Integral</button>
+    </form>
+
+</body>
+</html>
