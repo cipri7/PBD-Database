@@ -16,6 +16,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Conexiunea a eșuat: " . $conn->connect_error);
         }
 
+        echo "
+            <style>
+                .error-message {
+                    width: 50%;
+                    margin: 20px auto;
+                    padding: 15px;
+                    background-color: #ffcccc;
+                    color: #a00;
+                    border: 1px solid #a00;
+                    border-radius: 5px;
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    font-size: 1.2em;
+                }
+            </style>";
+
+        echo "
+            <style>
+                .succes-message {
+                    width: 50%;
+                    margin: 20px auto;
+                    padding: 15px;
+                    background-color: #ccffcc;
+                    color: #0a0;
+                    border: 1px solid #0a0;
+                    border-radius: 5px;
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    font-size: 1.2em;
+                }
+            </style>";
+
         // Găsește id_client pe baza CNP-ului
         $sql_client = "SELECT id_client FROM clienti WHERE CNP = ?";
         $stmt_client = $conn->prepare($sql_client);
@@ -23,8 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_client->execute();
         $result_client = $stmt_client->get_result();
 
-        if ($result_client->num_rows == 0) {
-            die("Clientul cu CNP-ul $CNP nu există.");
+        if ($result_client->num_rows == 0) {    
+            echo "
+                <div class='error-message'>
+                    Clientul cu CNP-ul $CNP nu a fost găsit.
+                </div>
+            ";
+            return;
         }
 
         $client = $result_client->fetch_assoc();
@@ -43,7 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result_produs = $stmt_produs->get_result();
 
         if ($result_produs->num_rows == 0) {
-            die("Produsul $produs nu a fost găsit pentru clientul cu CNP-ul $CNP.");
+            echo "
+                <div class='error-message'>
+                    Produsul $produs nu a fost găsit pentru clientul cu CNP-ul $CNP.
+                </div>
+            ";
+            return;
         }
 
         $achizitie = $result_produs->fetch_assoc();
@@ -61,8 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $rest = calculeazaRestDePlata($CNP, $produs);
-    echo "Restul de plată pentru produsul $produs și clientul cu CNP-ul $CNP este: $rest lei.";
-} else {
-    echo "Formular invalid!";
+    // Acum afișăm restul doar dacă produsul a fost găsit și restul de plată există
+    if ($rest !== null) {
+    echo "
+        <div class='succes-message'>
+            Rest de plată pentru produsul $produs al clientului cu CNP-ul $CNP: $rest RON.
+        </div>";
+    } else {
+        echo "
+            <div class='error-message'>
+                Formular invalid.
+            </div>";
+    }
 }
 ?>

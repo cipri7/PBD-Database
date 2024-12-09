@@ -12,6 +12,61 @@ function clientiMajori() {
         die("Conexiunea a eșuat: " . $conn->connect_error);
     }
 
+    echo "
+        <style>
+            .error-message {
+                width: 50%;
+                margin: 20px auto;
+                padding: 15px;
+                background-color: #ffcccc;
+                color: #a00;
+                border: 1px solid #a00;
+                border-radius: 5px;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                font-size: 1.2em;
+            }
+        </style>";
+
+    echo "
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f9;
+            }
+            h1 {
+                text-align: center;
+                color: #4CAF50;
+                margin-top: 20px;
+                font-size: 2.5em;
+                font-weight: bold;
+            }
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:hover {
+                background-color: #f1f1f1;
+            }
+        </style>
+        ";
+
     // Query pentru clienți majori fără LIMIT în subquery
     $sql = "
         SELECT c.nume, c.prenume, c.CNP, SUM(a.suma_incasata) AS suma_totala
@@ -55,8 +110,8 @@ function clientiMajori() {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<h2>Clienți Major</h2>";
-        echo "<table border='1'>";
+        echo "<h1>Clienți Major</h1>";
+        echo "<table>";
         echo "<tr><th>Nume</th><th>Prenume</th><th>CNP</th><th>Suma Totală Încăsată</th></tr>";
 
         while ($row = $result->fetch_assoc()) {
@@ -70,7 +125,10 @@ function clientiMajori() {
 
         echo "</table>";
     } else {
-        echo "Nu există clienți majori conform criteriilor.";
+        echo "
+            <div class='error-message'>
+                Nu există clienți majori.
+            </div>";
     }
 
     $conn->close();

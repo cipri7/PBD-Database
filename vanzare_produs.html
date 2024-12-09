@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicație Gestionare Vânzări</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #0078d4;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        h2 {
+            color: #0078d4;
+            margin-top: 20px;
+        }
+
+        form {
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 40px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aplicație Gestionare Vânzări</h1>
+    </header>
+
+    <section>
+        <h2>Vânzare Produs</h2>
+        <form action="vanzare_produs.php" method="POST">
+            <label for="CNP">CNP:</label>
+            <input type="text" id="CNP" name="CNP" required>
+
+            <label for="produs">Nume Produs:</label>
+            <input type="text" id="produs" name="produs" required>
+
+            <label for="data">Data Achiziției:</label>
+            <input type="date" id="data" name="data" required>
+
+            <label for="pret">Preț:</label>
+            <input type="number" id="pret" name="pret" step="0.01" required>
+
+            <label for="suma_incasata">Sumă Încăsată:</label>
+            <input type="number" id="suma_incasata" name="suma_incasata" step="0.01" required>
+
+            <button type="submit">Vinde Produs</button>
+        </form>
+    </section>
+
+    <footer>
+        &copy; 2024 Aplicație Gestionare Vânzări
+    </footer>
+</body>
+</html>
